@@ -32,21 +32,17 @@ for i, d in enumerate(split_data):
 
     #Find first number
     for x in range(0, len(d)):
-        try:
-            first_num = int(d[x])
+        if d[x].isdigit():
+            first_num = d[x]
             break
-        except ValueError: 
-            pass
     
     #Find second number
     for x in range(len(d)-1, -1, -1):
-        try:
-            last_num = int(d[x])
+        if d[x].isdigit():
+            last_num = d[x]
             break
-        except ValueError:
-            pass
-
+    
     #Append to solution
-    solution += int(str(first_num) + str(last_num))
+    solution += int(str(first_num + last_num))
 
 print(f"Final solution: {solution}")
