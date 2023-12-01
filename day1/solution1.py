@@ -19,27 +19,34 @@ conversions = {
 
 for i, d in enumerate(split_data):
     mods = []
+    #Find first position of all conversions
     for k, v in conversions.items():
-        pos = [m.start() for m in re.finditer(k, d)]
-        for p in pos:
-            mods.append((p, v))
+        mods += [(m.start(), v) for m in re.finditer(k, d)]
+
+    #Replace conversions
     for mod in mods:
         d = d[:mod[0]] + mod[1] + d[mod[0] + 1:]
+
     first_num = ""
     last_num = ""
+
+    #Find first number
     for x in range(0, len(d)):
         try:
             first_num = int(d[x])
             break
         except ValueError: 
             pass
-
+    
+    #Find second number
     for x in range(len(d)-1, -1, -1):
         try:
             last_num = int(d[x])
             break
         except ValueError:
             pass
+
+    #Append to solution
     solution += int(str(first_num) + str(last_num))
 
 print(f"Final solution: {solution}")
